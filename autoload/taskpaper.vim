@@ -75,6 +75,7 @@ function! taskpaper#has_tag(tag)
         return 1
     else
         return 0
+    endif
 endfunction
 
 function! taskpaper#cycle_tags(...)
