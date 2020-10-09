@@ -564,8 +564,6 @@ function! taskpaper#newline_indent()
     return ''
 endfunction
 
-imap <Plug>TaskPaperNewlineIndent <C-R>=taskpaper#newline_indent()<CR>
-
 function! taskpaper#tag_style(...)
     if a:0 > 0
         let tag_name = a:1
