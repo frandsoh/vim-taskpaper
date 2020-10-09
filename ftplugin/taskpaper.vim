@@ -112,6 +112,7 @@ if !exists("no_plugin_maps") && !exists("no_taskpaper_maps")
     vnoremap <buffer> <Leader>tt :norm <Leader>tt<CR>
     vnoremap <buffer> <Leader>tx :norm <Leader>tx<CR>
 
+    imap <buffer> <C-L> <Plug>TaskPaperIndent
     if mapcheck("o", "n") == ''
         nmap <buffer> o <Plug>TaskPaperNewline
     endif
