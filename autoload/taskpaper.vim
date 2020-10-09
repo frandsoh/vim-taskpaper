@@ -534,6 +534,37 @@ function! taskpaper#newline()
     return "\<End>"
 endfunction
 
+function! taskpaper#newline_indent()
+    " return a number of current line
+    let lnum = line('.')
+    " retun a string of current line
+    let line = getline('.')
+
+    let depth = len(matchstr(line, '^\t*'))
+
+    "previous line
+    let pline = getline(lnum - 1)
+    let pdepth = len(matchstr(pline, '^\t*'))
+
+    if lnum == 1 || line !~ '^\s*\%[-]\s*$' || pline =~ '^\s*$'
+        " if lnum == 1 || line =~ '^\S*$' || pline =~ '^\s*$'
+        echomsg "Hello"
+        return ''
+    endif
+    " if depth == pdepth
+    "     call setline(lnum, repeat("\t", pdepth + 1) . '- ')
+    if depth <= pdepth
+        call setline(lnum, repeat("\t", depth + 1) . '- ')
+    elseif depth == pdepth + 1
+        call setline(lnum, repeat("\t", pdepth + 1) . '')
+        echo "Write a note here"
+    endif
+
+    startinsert!
+    return ''
+endfunction
+
+imap <Plug>TaskPaperNewlineIndent <C-R>=taskpaper#newline_indent()<CR>
 
 function! taskpaper#tag_style(...)
     if a:0 > 0
