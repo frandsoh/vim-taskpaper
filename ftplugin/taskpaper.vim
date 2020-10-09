@@ -85,6 +85,8 @@ setlocal autoindent
     \       o<C-r>=taskpaper#newline()<CR>
     inoremap <silent> <buffer> <Plug>TaskPaperNewline
     \       <CR><C-r>=taskpaper#newline()<CR>
+    inoremap <silent> <buffer> <Plug>TaskPaperIndent
+    \       <C-r>=taskpaper#newline_indent()<CR>
 
 if !exists("no_plugin_maps") && !exists("no_taskpaper_maps")
     nmap <buffer> <Leader>tp <Plug>TaskPaperFoldProjects
