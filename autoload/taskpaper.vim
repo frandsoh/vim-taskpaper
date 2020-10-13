@@ -539,22 +539,28 @@ function! taskpaper#newline_indent()
     let lnum = line('.')
     " retun a string of current line
     let line = getline('.')
-
-    let depth = len(matchstr(line, '^\t*'))
+    " let depth = len(matchstr(line, '^\t*'))
+    let depth = taskpaper#util#depth(line)
 
     "previous line
     let pline = getline(lnum - 1)
-    let pdepth = len(matchstr(pline, '^\t*'))
+    let pdepth = taskpaper#util#depth(pline)
 
-    if lnum == 1 || line !~ '^\s*\%[-]\s*$' || pline =~ '^\s*$'
+    if taskpaper#util#line_empty(pline)
+        echo "Previous line is empty - Don't know what to do"
+        return ''
+    endif
+
+    if lnum == 1 || line !~ '^\s*\%[-]\s*$'
         " if lnum == 1 || line =~ '^\S*$' || pline =~ '^\s*$'
-        echomsg "Hello"
+        echomsg "Can't do it"
         return ''
     endif
     " if depth == pdepth
     "     call setline(lnum, repeat("\t", pdepth + 1) . '- ')
     if depth <= pdepth
         call setline(lnum, repeat("\t", depth + 1) . '- ')
+        echo "Indenting task"
     elseif depth == pdepth + 1
         call setline(lnum, repeat("\t", pdepth + 1) . '')
         echo "Write a note here"
@@ -592,3 +598,5 @@ function! taskpaper#tag_style_dict(tsd)
 endfunction
 
 let &cpo = s:save_cpo
+
+" vim: sw=4
