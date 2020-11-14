@@ -25,12 +25,12 @@ endif
 " When moving a task, should the cursor follow or stay in the same place
 " (default: follow)
 if !exists('g:task_paper_follow_move')
-    let g:task_paper_follow_move = 1 
+    let g:task_paper_follow_move = 1
 endif
 
 " Hide @done tasks when searching tags
 if !exists('g:task_paper_search_hide_done')
-    let g:task_paper_search_hide_done = 0 
+    let g:task_paper_search_hide_done = 0
 endif
 
 " Add '@' to keyword character set so that we can complete contexts as keywords
@@ -85,6 +85,7 @@ setlocal autoindent
     \       o<C-r>=taskpaper#newline()<CR>
     inoremap <silent> <buffer> <Plug>TaskPaperNewline
     \       <CR><C-r>=taskpaper#newline()<CR>
+
     inoremap <silent> <buffer> <Plug>TaskPaperIndent
     \       <C-r>=taskpaper#newline_indent()<CR>
 
@@ -113,6 +114,7 @@ if !exists("no_plugin_maps") && !exists("no_taskpaper_maps")
     vnoremap <buffer> <Leader>tx :norm <Leader>tx<CR>
 
     imap <buffer> <C-L> <Plug>TaskPaperIndent
+
     if mapcheck("o", "n") == ''
         nmap <buffer> o <Plug>TaskPaperNewline
     endif
